@@ -23,6 +23,7 @@
     "nodemon": "^3.1.14"
   },
   "dependencies": {
+    "bootstrap": "^5.3.8",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "path": "^0.12.7"
