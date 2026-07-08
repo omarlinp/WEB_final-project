@@ -15,10 +15,34 @@ const PORT = process.env.PORT || 3000;
 // setup Express server
 const app = express()
 
-app.get('/', (req, res) =>{
-    res.send('hello word');
-});
+//set the view engine
+app.set('view engine','ejs');
+app.set('views', path.join(__dirname, 'src/views'));
+
+
 //express configuration
+
+//routes
+app.get('/', (req, res) =>{
+    res.render('index')
+})
+app.get('/login',(req,res) => {
+    res.render('forms/login')
+})
+app.get('/signup',(req,res) => {
+    res.render('forms/registration')
+})
+app.get('/about',(req,res) => {
+    res.render('about')
+})
+app.get('/admin',(req,res) => {
+    res.render('admin/admin')
+})
+app.get('/profile',(req,res) => {
+    res.render('profile')
+})
+
+
 
 
 // start the server
