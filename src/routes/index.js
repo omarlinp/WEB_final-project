@@ -1,9 +1,12 @@
 import express from 'express';
+import { getAllUsers } from '../models/users.js';
 
 const router  = express.Router();
 
 //routes
-router.get('/login',(req,res) => {
+router.get('/login', async (req, res) => {
+    const test = await getAllUsers();
+    console.log(test);
     res.render('forms/login')
 })
 router.get('/signup',(req,res) => {
