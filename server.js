@@ -2,6 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import userRouter from './src/routes/index.js';
+
 
 //starting dotenv
 dotenv.config()
@@ -22,27 +24,11 @@ app.set('views', path.join(__dirname, 'src/views'));
 
 //express configuration
 
-//routes
-app.get('/', (req, res) =>{
+
+app.get('/', async (req, res) =>{
     res.render('index')
 })
-app.get('/login',(req,res) => {
-    res.render('forms/login')
-})
-app.get('/signup',(req,res) => {
-    res.render('forms/registration')
-})
-app.get('/about',(req,res) => {
-    res.render('about')
-})
-app.get('/admin',(req,res) => {
-    res.render('admin/admin')
-})
-app.get('/profile',(req,res) => {
-    res.render('profile')
-})
-
-
+app.use('/', userRouter)
 
 
 // start the server
