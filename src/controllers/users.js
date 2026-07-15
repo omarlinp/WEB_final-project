@@ -3,12 +3,10 @@ import {createUser} from '../models/users.js';
 
 export async function renderSignUp(req, res, next) {
     try {
-        const title =  'Sign Up';
-        
-        
-
+        res.render('forms/registration', { title: 'Sign Up' });
     } catch (error) {
-        
+        console.error(error);
+        next(error);
     }
 }
 export async function createRegistration(req,res,next) {

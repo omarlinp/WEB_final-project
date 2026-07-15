@@ -25,37 +25,37 @@
                         <div class="p-5">
                             <h2 class="fw-bold"> Create Account </h2>
                             <p class="text-secondary mb-4"> Fill in the information below.</p>
-                            <form>
+                            <form id="signup">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label"> First Name </label>
-                                        <input type="text" class="form-control" placeholder="John">
+                                        <label class="form-label" for="first_name"> First Name </label>
+                                        <input type="text" class="form-control" placeholder="John" name="first_name">
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label"> Last Name </label>
-                                        <input type="text" class="form-control" placeholder="Doe">
+                                        <label class="form-label" for="last_name"> Last Name </label>
+                                        <input type="text" class="form-control" placeholder="Doe" name="last_name">
                                     </div>
                                 </div>
                                 <div class="mb-4 text-center">
-                                    <label for="profilePicture" class="form-label d-block"> Profile Picture </label>
+                                    <label for="profile_image" class="form-label d-block"> Profile Picture </label>
                                     <img id="profilePreview" src="https://placehold.co/120x120?text=Photo" class="rounded-circle border mb-3" style="width:120px;height:120px;object-fit:cover;" alt="Profile preview">
-                                    <input type="file" class="form-control" id="profilePicture" name="profilePicture" accept="image/*">
+                                    <input type="file" class="form-control" id="profile_image" name="profile_image" accept="image/*">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Username</label>
+                                    <label class="form-label" for="username">Username</label>
                                     <div class="input-group">
                                         <span class="input-group-text"> @ </span>
-                                        <input type="text" class="form-control" placeholder="username">
+                                        <input type="text" class="form-control" placeholder="username" name="username">
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label"> Email Address </label>
-                                    <input type="email" class="form-control" placeholder="name@example.com">
+                                    <label class="form-label" for="email"> Email Address </label>
+                                    <input type="email" class="form-control" placeholder="name@example.com" name="email">
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Password</label>
-                                        <input type="password" class="form-control">
+                                        <label class="form-label" for="password">Password</label>
+                                        <input type="password" class="form-control" name="password" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label"> Confirm Password </label>
@@ -68,7 +68,7 @@
                                     </label>
                                 </div>
                                 <button class="btn btn-dark w-100 mb-3"> Create Account</button>
-                                <button type="button" class="btn btn-outline-secondary w-100">
+                                <button type="submit" class="btn btn-outline-secondary w-100">
                                     <i class="bi bi-google me-2"></i> Sign up with Google</button>
                             </form>
                             <hr>
@@ -82,6 +82,7 @@
         </div>
     </div>
 </div>
+<script type="module" src="/js/registration.js"></script>
 <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
