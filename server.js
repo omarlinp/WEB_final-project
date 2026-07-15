@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import userRouter from './src/routes/index.js';
+import {renderItems} from './src/controllers/item.js'
 
 
 //starting dotenv
@@ -23,12 +24,13 @@ app.set('views', path.join(__dirname, 'src/views'));
 
 
 //express configuration
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', async (req, res) =>{
     res.render('index')
 })
-app.use('/', userRouter)
+app.use('/users', userRouter)
 
 
 // start the server

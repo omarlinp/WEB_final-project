@@ -1,17 +1,17 @@
 import express from 'express';
-import { getAllUsers } from '../models/users.js';
-
+import {renderSignUp, createRegistration} from '../controllers/users.js'
 const router  = express.Router();
 
 //routes
 router.get('/login', async (req, res) => {
-    const test = await getAllUsers();
-    console.log(test);
     res.render('forms/login')
 })
-router.get('/signup',(req,res) => {
-    res.render('forms/registration')
-})
+
+router.get('/signup',renderSignUp)
+router.post('/signup', createRegistration)
+
+
+
 router.get('/about',(req,res) => {
     res.render('about')
 })
