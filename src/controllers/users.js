@@ -1,0 +1,24 @@
+import {createUser} from '../models/users.js';
+
+
+export async function renderSignUp(req, res, next) {
+    try {
+        const title =  'Sign Up';
+        
+        
+
+    } catch (error) {
+        
+    }
+}
+export async function createRegistration(req,res,next) {
+    try {
+        const signup =  await createUser(req.body);
+        console.log(signup);
+        res.send(signup)
+
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+}
