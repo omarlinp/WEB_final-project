@@ -5,6 +5,7 @@ export async function renderItems (req, res, next) {
  try {
     const items = await getAllItems();
     console.log(items);
+    res.render('index',{items})
 
     
  } catch (error) {

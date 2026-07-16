@@ -1,20 +1,25 @@
 <%- include('partials/header') %>
 
 <div class="container py-5">
-
     <div class="row g-4">
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="card border-0">
-                <img src="https://placehold.co/600x400" class="card-img-top" alt="">
-                <div class="card-body px-0">
-                    <h4>Product #2</h4>
-                    <h5 class="text-secondary">$5,000</h5>
-                    <a href="#" class="text-decoration-none">Read more</a>
+
+        <% items.forEach(item => { %>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <img src="<%= item.image %>" class="card-img-top" alt="<%= item.title %>">
+
+                    <div class="card-body">
+                        <h4><%= item.title %></h4>
+                        <h5 class="text-secondary">$<%= item.price %></h5>
+                        <a href="/items/<%= item.id %>" class="text-decoration-none">
+                            Read more
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
+        <% }) %>
+
     </div>
-    
 </div>
 
 

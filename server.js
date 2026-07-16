@@ -29,9 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', async (req, res) =>{
-    res.render('index')
-})
+app.get('/',renderItems)
 app.use('/users', userRouter)
 
 
