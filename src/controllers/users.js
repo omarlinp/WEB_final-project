@@ -1,4 +1,4 @@
-import {createUser} from '../models/users.js';
+import {getAllUsers,createUser,updateUser,deleteUser} from '../models/users.js';
 
 
 export async function renderSignUp(req, res, next) {
@@ -9,6 +9,7 @@ export async function renderSignUp(req, res, next) {
         next(error);
     }
 }
+
 export async function createRegistration(req,res,next) {
     try {
         const signup =  await createUser(req.body);
@@ -18,5 +19,19 @@ export async function createRegistration(req,res,next) {
     } catch (error) {
         console.log(error)
         next(error)
+    }
+}
+export async function updateAccount(req, res, next) {
+    try {
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+export async function deleteAccount(req,res,next) {
+    try {
+        
+    } catch (error) {
+        console.log(error)
     }
 }
