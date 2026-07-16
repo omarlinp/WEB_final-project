@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import Router from './src/routes/index.js';
-import {renderItems} from './src/controllers/item.js'
+
 
 
 //starting dotenv
@@ -29,8 +29,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/',renderItems)
-app.use('/users', Router)
+
+app.use('/', Router)
 
 
 // start the server
