@@ -12,7 +12,12 @@ export async function renderSignUp(req, res, next) {
 
 export async function createRegistration(req,res,next) {
     try {
-        const signup =  await createUser(req.body);
+        const user = {
+            ...req.body,
+            profile_image: req.file ?req.file.filename:null
+        };
+        
+        const signup =  await createUser(user);
         console.log(signup);
         res.send(signup)
 
