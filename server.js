@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import userRouter from './src/routes/index.js';
+import Router from './src/routes/index.js';
 import {renderItems} from './src/controllers/item.js'
 
 
@@ -30,7 +30,7 @@ app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstra
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/',renderItems)
-app.use('/users', userRouter)
+app.use('/users', Router)
 
 
 // start the server

@@ -3,6 +3,24 @@ import {renderSignUp, createRegistration} from '../controllers/users.js';
 import upload from '../Middleware/image.js';
 const router  = express.Router();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //routes
 router.get('/login', async (req, res) => {
     res.render('forms/login')
