@@ -1,5 +1,5 @@
 import express from 'express';
-import {renderItems} from '../controllers/item.js'
+
 const router  = express.Router();
 
 
