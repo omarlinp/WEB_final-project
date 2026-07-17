@@ -25,7 +25,7 @@ export async function loginUser(req, res, next) {
         console.log('the user has been authenticated susscessfully')
         res.json({  success: true, 
                     user: {id: user.id, admin: user.is_admin},
-                    redirect: "/users/profile"
+                    redirect: `/users/profile?id=${user.id}&is_admin=${user.is_admin}`
                 });
     } catch (error) {
         console.log(error);
