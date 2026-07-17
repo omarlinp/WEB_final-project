@@ -10,7 +10,13 @@ form.addEventListener("submit", async (event) => {
             body: formData
         });
         const result = await response.json();
-        console.log(result);
+
+        if(result.success){
+            sessionStorage.setItem('id', JSON.stringify(result.user.id));
+            sessionStorage.setItem('admin', JSON.stringify(result.user.admin));
+        }
+        window.location.href = result.redirect;
+
         
     } catch (error) {
         console.log(error);

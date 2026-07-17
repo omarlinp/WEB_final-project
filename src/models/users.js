@@ -19,7 +19,7 @@ export async function createUser(object) {
     const {first_name,last_name,phone,email,profile_image,google_id,password,username} = object;
     const values = [first_name,last_name,phone,email,profile_image,google_id,password,username];
     const sql = `INSERT INTO users (first_name,last_name,phone,email,profile_image,google_id,password,username)
-                VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING id`;
+                VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING id,is_admin`;
     let result = await query(sql,values);
     return result.rows[0];
 

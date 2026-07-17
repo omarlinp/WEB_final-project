@@ -42,8 +42,10 @@ export async function createRegistration(req,res,next) {
         };
         
         const signup =  await createUser(user);
-        console.log(signup);
-        res.send(signup)
+        res.json({  success: true, 
+                    user: {id: signup.id, admin: signup.is_admin},
+                    redirect: `/users/profile?id=${signup.id}&is_admin=${signup.is_admin}`
+                });
 
     } catch (error) {
         console.log(error)
