@@ -1,4 +1,5 @@
 import {getAllUsers,GetUser,createUser,updateUser,deleteUser} from '../models/users.js';
+import {getItemsByUser} from '../models/items.js';
 import bcrypt from "bcrypt";
 
 export async function renderSignUp(req, res, next) {
@@ -7,6 +8,22 @@ export async function renderSignUp(req, res, next) {
     } catch (error) {
         console.error(error);
         next(error);
+    }
+}
+export async function renderProfile(req, res,next) {
+    try {
+        const id = req.query.id;
+        const admin = req.query.admin;
+        
+        const userData = await GetUser(id);
+        const itemsData = await getItemsByUser(id)
+        console.log(itemsData);
+        res.render('profile',{
+            user:userData,
+            items:itemsData
+        })
+    } catch (error) {
+        console.log(error)
     }
 }
 export async function loginUser(req, res, next) {
