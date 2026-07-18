@@ -1,7 +1,5 @@
 const form = document.getElementById("itemForm");
-
-    localStorage.setItem("user_id", "1");
-    const user_id = localStorage.getItem("user_id");
+    const user_id = localStorage.getItem("id");
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
