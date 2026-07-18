@@ -4,8 +4,11 @@ import upload from '../Middleware/image.js';
 
 const router  = express.Router();
 
-router.get('/item',(req,res) => {
+router.get('/new',(req,res) => {
     res.render('forms/item')
+})
+router.get('/details',(req,res) => {
+    res.render('product-detail')
 })
 
 router.post('/item',upload.array("images",10), createproduct);
