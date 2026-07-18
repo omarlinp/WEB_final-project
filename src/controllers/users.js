@@ -1,4 +1,4 @@
-import {getAllUsers,GetUser,createUser,updateUser,deleteUser} from '../models/users.js';
+import {getAllUsers,GetUser,GetUserById,createUser,updateUser,deleteUser} from '../models/users.js';
 import {getItemsByUser} from '../models/items.js';
 import bcrypt from "bcrypt";
 
@@ -15,7 +15,7 @@ export async function renderProfile(req, res,next) {
         const id = req.query.id;
         const admin = req.query.admin;
         
-        const userData = await GetUser(id);
+        const userData = await GetUserById(id);
         const itemsData = await getItemsByUser(id)
         console.log(itemsData);
         res.render('profile',{

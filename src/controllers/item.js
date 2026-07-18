@@ -1,10 +1,9 @@
 //importing the model functions for the items
-import {getAllItems,createItem} from '../models/items.js';
+import {getAllItems,createItem,getOneItem} from '../models/items.js';
 
 export async function renderItems (req, res, next) {
  try {
     const items = await getAllItems();
-    console.log(items);
     res.render('index',{items})
 
     
@@ -12,6 +11,17 @@ export async function renderItems (req, res, next) {
     console.error('failed to retrieve data', error.message)
     throw error;
  }
+}
+export async function renderItemDetails(req,res,next) {
+   const id = Number(req.query.item_id);
+   try {
+      const item = await getOneItem(id)
+      console.log(item);
+      res.render('product-detail',{item})
+      
+   } catch (error) {
+      
+   }
 }
 export async function createproduct(req,res,next) {
    try {

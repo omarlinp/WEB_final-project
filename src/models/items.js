@@ -24,8 +24,7 @@ export async function getAllItems() {
 export async function getOneItem(id) {
     const sql = `SELECT * FROM items WHERE id = $1;`;
     const result = await query(sql,[id]);
-
-    return result;
+    return result.rows[0];
 }
 export async function getItemsByUser(id) {
     const sql = `SELECT DISTINCT ON (i.id) 

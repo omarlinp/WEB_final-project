@@ -1,97 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Product Details</title>
-
-    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet">
-</head>
-
-<body class="bg-light">
-
-<!-- Navbar -->
-
-<nav class="navbar navbar-expand-lg bg-white border-bottom">
-    <div class="container">
-
-        <a class="navbar-brand fw-bold fs-3">
-            TechMarket
-        </a>
-
-    </div>
-</nav>
-
-<!-- Product -->
-
+<%- include('partials/header') %>
 <div class="container py-5">
-
 <div class="row g-5">
-
-    <!-- Images -->
-
-    <div class="col-lg-6">
-
-        <img
-            src="https://placehold.co/700x500"
-            class="img-fluid rounded shadow-sm mb-3">
-
+   <div class="col-lg-6">
+        <img src="https://placehold.co/700x500" class="img-fluid rounded shadow-sm mb-3">
         <div class="row g-2">
-
             <div class="col-3">
-                <img src="https://placehold.co/150"
-                     class="img-fluid rounded border">
+                <img src="https://placehold.co/150" class="img-fluid rounded border">
             </div>
-
             <div class="col-3">
-                <img src="https://placehold.co/150"
-                     class="img-fluid rounded border">
+                <img src="https://placehold.co/150" class="img-fluid rounded border">
             </div>
-
             <div class="col-3">
-                <img src="https://placehold.co/150"
-                     class="img-fluid rounded border">
+                <img src="https://placehold.co/150" class="img-fluid rounded border">
             </div>
-
             <div class="col-3">
-                <img src="https://placehold.co/150"
-                     class="img-fluid rounded border">
+                <img src="https://placehold.co/150" class="img-fluid rounded border">
             </div>
-
         </div>
-
     </div>
-
     <!-- Details -->
 
     <div class="col-lg-6">
-
-        <h1 class="fw-bold">
-            NVIDIA RTX 4080 Super
-        </h1>
-
-        <h2 class="text-success mb-4">
-            $900
-        </h2>
-
+        <h1 class="fw-bold"> <%= item.name%> </h1>
+        <h2 class="text-success mb-4"><%= item.price%>  </h2>
         <div class="mb-3">
-
-            <span class="badge bg-secondary">
-                Used
-            </span>
-
-            <span class="badge bg-primary">
-                Graphics Card
-            </span>
-
+            <span class="badge bg-secondary"> Used </span>
+            <span class="badge bg-primary"> Graphics Card </span>
         </div>
-
         <table class="table">
-
             <tbody>
-
                 <tr>
                     <th>Condition</th>
                     <td>Used - Excellent</td>
@@ -144,13 +81,7 @@
 
     <div class="card-body">
 
-        <p>
-            Selling my NVIDIA RTX 4080 Super in excellent condition.
-            Used only for gaming and never overclocked.
-
-            Includes the original box, power adapter,
-            anti-static bag, and receipt.
-        </p>
+        <p><%= item.description %></p>
 
     </div>
 
@@ -268,15 +199,7 @@ View
 
 </div>
 
-<footer class="border-top mt-5 py-4">
-
-<div class="container text-center">
-
-© 2026 TechMarket
-
-</div>
-
-</footer>
+<%- include('partials/footer') %>
 
 </body>
 </html>

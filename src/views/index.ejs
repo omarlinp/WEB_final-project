@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <h4><%= item.name %></h4>
                         <h5 class="text-secondary">$<%= item.price %></h5>
-                        <a href="/items/details" class="text-decoration-none">
+                        <a href="/items/details?item_id=<%= item.id%> " class="text-decoration-none">
                             Read more
                         </a>
                     </div>
