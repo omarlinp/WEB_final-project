@@ -6,12 +6,12 @@
         <% items.forEach(item => { %>
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="card h-100">
-                    <img src="<%= item.image %>" class="card-img-top" alt="<%= item.title %>">
+                    <img src="/img/<%= item.image %>" class="card-img-top" alt="<%= item.title %>">
 
                     <div class="card-body">
-                        <h4><%= item.title %></h4>
+                        <h4><%= item.name %></h4>
                         <h5 class="text-secondary">$<%= item.price %></h5>
-                        <a href="/items/<%= item.id %>" class="text-decoration-none">
+                        <a href="/items/details" class="text-decoration-none">
                             Read more
                         </a>
                     </div>
@@ -25,7 +25,7 @@
 
 
 
-<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 <%- include('partials/footer') %>
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
