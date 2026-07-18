@@ -2,7 +2,7 @@
 <div class="container py-5">
 <div class="row g-5">
    <div class="col-lg-6">
-        <img src="https://placehold.co/700x500" class="img-fluid rounded shadow-sm mb-3">
+        <img src="/img/<%= item.image_path%>" class="img-fluid rounded shadow-sm mb-3">
     </div>
     <!-- Details -->
 
@@ -13,22 +13,22 @@
             <tbody>
                 <tr>
                     <th>Seller</th>
-                    <td>Seller Name</td>
+                    <td><%= user.first_name %> <%= user.last_name %></td>
                 </tr>
 
                 <tr>
                     <th>Email</th>
-                    <td>test@email.com</td>
+                    <td><%= user.email %></td>
                 </tr>
 
                 <tr>
                     <th>Phone</th>
-                    <td>123-456-7891</td>
+                    <td><%= user.phone %></td>
                 </tr>
 
                 <tr>
                     <th>Posted</th>
-                    <td>July 8, 2026</td>
+                    <td><%= item.created_date%></td>
                 </tr>
 
             </tbody>
