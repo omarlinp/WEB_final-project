@@ -25,15 +25,17 @@
                         <div class="p-5">
                             <h2 class="fw-bold"> Create Account </h2>
                             <p class="text-secondary mb-4"> Fill in the information below.</p>
-                            <form id="signup" enctype="multipart/form-data">
+                            <form id="signup" class="needs-validation" enctype="multipart/form-data" novalidate>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label" for="first_name"> First Name </label>
-                                        <input type="text" class="form-control" placeholder="John" name="first_name">
+                                        <input type="text" class="form-control" id="first_name" placeholder="John" name="first_name" required minlength="2" maxlength="50" pattern="[A-Za-z][A-Za-z\s'\-]{1,49}" title="First name must be 2-50 characters and contain letters only (spaces, apostrophes, and hyphens allowed)." autocomplete="given-name">
+                                        <div class="invalid-feedback">Please enter a valid first name.</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label" for="last_name"> Last Name </label>
-                                        <input type="text" class="form-control" placeholder="Doe" name="last_name">
+                                        <input type="text" class="form-control" id="last_name" placeholder="Doe" name="last_name" required minlength="2" maxlength="50" pattern="[A-Za-z][A-Za-z\s'\-]{1,49}" title="Last name must be 2-50 characters and contain letters only (spaces, apostrophes, and hyphens allowed)." autocomplete="family-name">
+                                        <div class="invalid-feedback">Please enter a valid last name.</div>
                                     </div>
                                 </div>
                                 <div class="mb-4 text-center">
@@ -45,34 +47,40 @@
                                     <label class="form-label" for="username">Username</label>
                                     <div class="input-group">
                                         <span class="input-group-text"> @ </span>
-                                        <input type="text" class="form-control" placeholder="username" name="username">
+                                        <input type="text" class="form-control" id="username" placeholder="username" name="username" required minlength="3" maxlength="30" pattern="[A-Za-z0-9_]{3,30}" title="Username must be 3-30 characters using only letters, numbers, and underscores." autocomplete="username">
+                                        <div class="invalid-feedback">Choose a username with 3-30 letters, numbers, or underscores.</div>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="email"> Email Address </label>
-                                    <input type="email" class="form-control" placeholder="name@example.com" name="email">
+                                    <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" required maxlength="100" autocomplete="email">
+                                    <div class="invalid-feedback">Please enter a valid email address.</div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="phone"> Phone Number </label>
-                                    <input type="tel" class="form-control" id="phone" placeholder="(555) 123-4567" name="phone">
+                                    <input type="tel" class="form-control" id="phone" placeholder="(555) 123-4567" name="phone" required minlength="7" maxlength="20" pattern="\+?[0-9()\-\s]{7,20}" title="Enter a valid phone number using digits and optional +, spaces, parentheses, or hyphens." autocomplete="tel">
+                                    <div class="invalid-feedback">Please enter a valid phone number.</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label" for="password">Password</label>
-                                        <input type="password" class="form-control" name="password" required>
+                                        <input type="password" class="form-control" id="password" name="password" required minlength="8" maxlength="128" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,128}" title="Password must be at least 8 characters and include uppercase, lowercase, and a number." autocomplete="new-password">
+                                        <div class="invalid-feedback">Use at least 8 characters with uppercase, lowercase, and a number.</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label"> Confirm Password </label>
-                                        <input type="password" class="form-control">
+                                        <label class="form-label" for="confirm_password"> Confirm Password </label>
+                                        <input type="password" class="form-control" id="confirm_password" required autocomplete="new-password" oninput="this.setCustomValidity(this.value !== document.getElementById('password').value ? 'Passwords do not match.' : '')">
+                                        <div class="invalid-feedback">Passwords must match.</div>
                                     </div>
                                 </div>
                                 <div class="form-check mb-4">
-                                    <input class="form-check-input" type="checkbox" id="terms">
+                                    <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
                                     <label class="form-check-label" for="terms"> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
                                     </label>
+                                    <div class="invalid-feedback">You must agree before creating an account.</div>
                                 </div>
-                                <button class="btn btn-dark w-100 mb-3"> Create Account</button>
-                                <button type="submit" class="btn btn-outline-secondary w-100">
+                                <button type="submit" class="btn btn-dark w-100 mb-3"> Create Account</button>
+                                <button type="button" class="btn btn-outline-secondary w-100">
                                     <i class="bi bi-google me-2"></i> Sign up with Google</button>
                             </form>
                             <hr>

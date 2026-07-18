@@ -3,6 +3,14 @@ const form = document.getElementById("login");
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
+    if (!form.checkValidity()) {
+        event.stopPropagation();
+        form.classList.add("was-validated");
+        return;
+    }
+
+    form.classList.add("was-validated");
+
     const formData = new FormData(form);
     const data = {
         login: formData.get("login"),

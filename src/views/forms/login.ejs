@@ -26,14 +26,16 @@
                         <div class="p-5">
                             <h2 class="fw-bold mb-1"> Welcome Back </h2>
                             <p class="text-secondary mb-4"> Sign in to your account </p>
-                            <form id="login">
+                            <form id="login" class="needs-validation" novalidate>
                                 <div class="mb-3">
-                                    <label class="form-label" for="login">Email or Username</label>
-                                    <input type="login" class="form-control" placeholder="username on email" name="login">
+                                    <label class="form-label" for="userLogin">Email or Username</label>
+                                    <input type="text" class="form-control" id="userLogin" placeholder="username or email" name="login" required minlength="3" maxlength="100" pattern="(?:[A-Za-z0-9_]{3,30}|[^\s@]+@[^\s@]+\.[^\s@]{2,})" title="Enter a valid username (3-30 letters, numbers, underscore) or a valid email address." autocomplete="username">
+                                    <div class="invalid-feedback">Please enter a valid username or email address.</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label"> Password </label>
-                                    <input type="password" class="form-control" placeholder="Password" name="password">
+                                    <label class="form-label" for="password"> Password </label>
+                                    <input type="password" class="form-control" id="password" placeholder="Password" name="password" required minlength="6" maxlength="128" autocomplete="current-password">
+                                    <div class="invalid-feedback">Please enter your password (minimum 6 characters).</div>
                                 </div>
                                 <div class="d-flex justify-content-between mb-4">
                                     <div class="form-check">
