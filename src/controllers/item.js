@@ -27,7 +27,7 @@ export async function createproduct(req,res,next) {
    try {
       const item = {
          ...req.body,
-         images: req.files ? req.files.map(file => file.filename):[]
+         image_path: req.file?.filename
       };
       console.log(item)
 

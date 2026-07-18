@@ -9,6 +9,6 @@ router.get('/new',(req,res) => {
 })
 router.get('/details',renderItemDetails)
 
-router.post('/item',upload.array("images",10), createproduct);
+router.post('/item',upload.single("images"), createproduct);
 
 export default router;

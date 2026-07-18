@@ -17,7 +17,6 @@ export async function renderProfile(req, res,next) {
         
         const userData = await GetUserById(id);
         const itemsData = await getItemsByUser(id)
-        console.log(itemsData);
         res.render('profile',{
             user:userData,
             items:itemsData

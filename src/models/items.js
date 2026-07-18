@@ -20,13 +20,13 @@ export async function getOneItem(id) {
 export async function getItemsByUser(id) {
     const sql = `SELECT * FROM items
                 WHERE user_id = $1
-                ORDER BY created_date, img.id ASC;`
+                ORDER BY created_date ASC;`
     const result = await query(sql,[id]);
     return result.rows;
 }
 export async function createItem(object) {
-    const {user_id,province_id,name,price,description, images = []} = object;
-    const values = [user_id,province_id,name,price,description];
+    const {user_id,name,price,description, image_path} = object;
+    const values = [user_id,name,price,description,image_path];
     const sql = `INSERT INTO items (user_id, name, price,description,image_path) VALUES ($1, $2, $3, $4, $5) RETURNING id`;
     let result = await query(sql, values);
 

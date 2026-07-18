@@ -6,7 +6,6 @@ const form = document.getElementById("itemForm");
 
     const formData = new FormData(form);
     formData.append("user_id",user_id);
-    formData.append("province_id",1);
     try {
         const response = await fetch("/items/item",{
             method: "POST",
