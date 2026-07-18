@@ -1,5 +1,6 @@
 //importing the model functions for the items
 import {getAllItems,createItem,getOneItem} from '../models/items.js';
+import {GetUserById} from '../models/users.js';
 
 export async function renderItems (req, res, next) {
  try {
@@ -15,9 +16,14 @@ export async function renderItems (req, res, next) {
 export async function renderItemDetails(req,res,next) {
    const id = Number(req.query.item_id);
    try {
-      const item = await getOneItem(id)
-      console.log(item);
-      res.render('product-detail',{item})
+      const itemData = await getOneItem(id)
+      console.log(itemData);
+      const userData = await GetUserById(itemData.user_id)
+      console.log(userData);
+      res.render('product-detail',{
+         item: itemData,
+         user: userData
+      })
       
    } catch (error) {
       
