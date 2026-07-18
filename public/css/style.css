@@ -1,0 +1,8 @@
+.marketplace-card {
+	max-width: 18rem;
+}
+
+.card-img-top {
+	height: 220px;
+	object-fit: cover;
+}

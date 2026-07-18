@@ -3,45 +3,27 @@
 <div class="row g-5">
    <div class="col-lg-6">
         <img src="https://placehold.co/700x500" class="img-fluid rounded shadow-sm mb-3">
-        <div class="row g-2">
-            <div class="col-3">
-                <img src="https://placehold.co/150" class="img-fluid rounded border">
-            </div>
-            <div class="col-3">
-                <img src="https://placehold.co/150" class="img-fluid rounded border">
-            </div>
-            <div class="col-3">
-                <img src="https://placehold.co/150" class="img-fluid rounded border">
-            </div>
-            <div class="col-3">
-                <img src="https://placehold.co/150" class="img-fluid rounded border">
-            </div>
-        </div>
     </div>
     <!-- Details -->
 
     <div class="col-lg-6">
         <h1 class="fw-bold"> <%= item.name%> </h1>
         <h2 class="text-success mb-4"><%= item.price%>  </h2>
-        <div class="mb-3">
-            <span class="badge bg-secondary"> Used </span>
-            <span class="badge bg-primary"> Graphics Card </span>
-        </div>
         <table class="table">
             <tbody>
                 <tr>
-                    <th>Condition</th>
-                    <td>Used - Excellent</td>
+                    <th>Seller</th>
+                    <td>Seller Name</td>
                 </tr>
 
                 <tr>
-                    <th>Brand</th>
-                    <td>NVIDIA</td>
+                    <th>Email</th>
+                    <td>test@email.com</td>
                 </tr>
 
                 <tr>
-                    <th>Model</th>
-                    <td>RTX 4080 Super</td>
+                    <th>Phone</th>
+                    <td>123-456-7891</td>
                 </tr>
 
                 <tr>
@@ -52,20 +34,6 @@
             </tbody>
 
         </table>
-
-        <div class="d-grid gap-2">
-
-            <button class="btn btn-dark btn-lg">
-                <i class="bi bi-chat-dots"></i>
-                Contact Seller
-            </button>
-
-            <button class="btn btn-outline-dark">
-                <i class="bi bi-heart"></i>
-                Add to Favorites
-            </button>
-
-        </div>
 
     </div>
 
@@ -86,119 +54,6 @@
     </div>
 
 </div>
-
-<!-- Seller -->
-
-<div class="card mt-4">
-
-    <div class="card-header fw-bold">
-        Seller Information
-    </div>
-
-    <div class="card-body d-flex align-items-center">
-
-        <img
-            src="https://placehold.co/80"
-            class="rounded-circle me-3">
-
-        <div>
-
-            <h5 class="mb-1">
-                John Doe
-            </h5>
-
-            <p class="text-secondary mb-1">
-                Member since 2024
-            </p>
-
-            <small class="text-warning">
-                ★★★★★ (23 Reviews)
-            </small>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- Related -->
-
-<h3 class="mt-5 mb-4">
-    Related Products
-</h3>
-
-<div class="row">
-
-<div class="col-md-4">
-
-<div class="card">
-
-<img src="https://placehold.co/400x250" class="card-img-top">
-
-<div class="card-body">
-
-<h5>RTX 4070 Ti</h5>
-
-<p class="text-success">$650</p>
-
-<a href="#" class="btn btn-outline-dark w-100">
-View
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="card">
-
-<img src="https://placehold.co/400x250" class="card-img-top">
-
-<div class="card-body">
-
-<h5>RX 7900 XT</h5>
-
-<p class="text-success">$700</p>
-
-<a href="#" class="btn btn-outline-dark w-100">
-View
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="card">
-
-<img src="https://placehold.co/400x250" class="card-img-top">
-
-<div class="card-body">
-
-<h5>RTX 3090</h5>
-
-<p class="text-success">$600</p>
-
-<a href="#" class="btn btn-outline-dark w-100">
-View
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 <%- include('partials/footer') %>
 
 </body>
