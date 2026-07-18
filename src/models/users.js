@@ -11,8 +11,8 @@ export async function getAllUsers() {
     }
 }
 export async function GetUser(login) {
-    const sql = `SELECT * FROM users WHERE email =$1 OR username = $2`;
-    let result = await query(sql, [login, login]);
+    const sql = `SELECT * FROM users WHERE email =$1 OR username = $2 OR id = $3`;
+    let result = await query(sql, [login, login,login]);
     return result.rows[0];
 }
 export async function createUser(object) {
