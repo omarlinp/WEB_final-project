@@ -38,13 +38,16 @@ export async function renderItemDetails(req,res,next) {
       next(error);
    }
 }
+export async function renderCreateItemForm(req, res, next) {
+   res.render('forms/item')
+}
 export async function createproduct(req,res,next) {
    try {
       const item = {
          ...req.body,
-         image_path: req.file?.filename
+         image_path: req.file?.filename,
+         user_id:req.session.userId
       };
-      console.log(item)
 
       const items = await createItem(item);
       console.log(items);
@@ -89,19 +92,28 @@ export async function UpdateItems(req, res, next) {
    }
 }
 export async function deleteItems(req, res, next) {
-   const id  = Number(req.query.item_id);
-   const result = await deleteItem(id);
-   if (deleted.image_path) {  
-      const safeFileName = path.basename(result.image_path);
-      const imageFullPath = path.join(process.cwd(), 'public', 'img', safeFileName);
-   }
    try {
-        await fs.unlink(imageFullPath);
-      } catch (err) {
-        if (err.code !== 'ENOENT') {
-          console.error('Image deletion failed:', err.message);
-        }
+      const id = Number(req.query.item_id);
+
+      const result = await deleteItem(id);
+      if (!result) {
+         return res.status(404).json({ success: false, message: 'Item not found' });
       }
-   res.status(200);
-   res.redirect("/users/profile?id=1&is_admin=false");
+
+      if (result.image_path) {
+         const safeFileName = path.basename(result.image_path);
+         const imageFullPath = path.join(process.cwd(), 'public', 'img', safeFileName);
+         try {
+            await fs.unlink(imageFullPath);
+         } catch (err) {
+            if (err.code !== 'ENOENT') {
+               console.error('Image deletion failed:', err.message);
+            }
+         }
+      }
+
+      return res.redirect('/users/profile?id=1&is_admin=false');
+   } catch (error) {
+      next(error);
+   }
 }

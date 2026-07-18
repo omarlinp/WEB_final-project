@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import Router from './src/routes/index.js';
+import session from 'express-session';
 
 
 
@@ -29,8 +30,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+//set express session
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave:false,
+    saveUninitialized: false,
+    cookie:{
+        maxAge: 1000 * 60 * 60 * 24,
+        secure: process.env.NODE_ENV === 'production'
+    }
+}))
 
 app.use('/', Router)
+
 
 
 // start the server

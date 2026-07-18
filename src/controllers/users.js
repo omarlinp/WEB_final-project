@@ -11,9 +11,14 @@ export async function renderSignUp(req, res, next) {
     }
 }
 export async function renderProfile(req, res,next) {
+    if (!req.session.isLoggedIn) {
+        return res.redirect('/users/login');
+    }
     try {
-        const id = req.query.id;
-        const admin = req.query.admin;
+        const id = req.session.userId
+        if (!id) {
+            return res.redirect('/users/login');
+        }
         
         const userData = await GetUserById(id);
         const itemsData = await getItemsByUser(id)
@@ -30,6 +35,7 @@ export async function renderProfile(req, res,next) {
         });
     } catch (error) {
         console.log(error);
+        next(error);
     }
 }
 export async function loginUser(req, res, next) {
@@ -46,9 +52,12 @@ export async function loginUser(req, res, next) {
             return res.status(401).json({success: false, message: "Invalid username/email or password"});
         }
         console.log('the user has been authenticated susscessfully')
+        req.session.userId = user.id;
+        req.session.isLoggedIn = true;
+        req.session.isAdmin = user.is_admin;
         res.json({  success: true, 
                     user: {id: user.id, admin: user.is_admin},
-                    redirect: `/users/profile?id=${user.id}&is_admin=${user.is_admin}`
+                    redirect: `/users/profile`
                 });
     } catch (error) {
         console.log(error);
@@ -65,6 +74,9 @@ export async function createRegistration(req,res,next) {
         };
         
         const signup =  await createUser(user);
+        req.session.userId = signup.id;
+        req.session.isLoggedIn = true;
+        req.session.isAdmin = signup.is_admin;
         res.json({  success: true, 
                     user: {id: signup.id, admin: signup.is_admin},
                     redirect: `/users/profile?id=${signup.id}&is_admin=${signup.is_admin}`

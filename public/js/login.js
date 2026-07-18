@@ -19,13 +19,6 @@ form.addEventListener("submit", async (event) => {
         });
         const result = await response.json(); 
         if (result.success) {
-            if (remember) {
-                localStorage.setItem('id', JSON.stringify(result.user.id));
-                localStorage.setItem('admin', JSON.stringify(result.user.admin));
-            } else {
-                sessionStorage.setItem('id', JSON.stringify(result.user.id));
-                sessionStorage.setItem('admin', JSON.stringify(result.user.admin));
-            }
             window.location.href = result.redirect;
         } else {
             alert(result.message);
