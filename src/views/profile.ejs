@@ -13,12 +13,12 @@
         <div class="col-lg-4">
             <img src="/img/<%= user.profile_image %>" class="img-fluid rounded shadow-sm w-100" alt="Profile Image">
             <div class="d-grid gap-2 mt-3">
-                <button type="button" class="btn btn-outline-dark" data-user-id="<%= user.id %>">
+                <a href="/users/update?id=<%= user.id %>" class="btn btn-outline-dark">
                     Update Account
-                </button>
-                <button type="button" class="btn btn-outline-danger" data-user-id="<%= user.id %>">
+                </a>
+                <a href="/users/delete?id=<%= user.id %>" class="btn btn-outline-danger">
                     Delete Account
-                </button>
+                </a>
             </div>
         </div>
         <div class="col-lg-8">
@@ -37,16 +37,15 @@
                     <h3 class="h4 mb-2"><%= item.name%></h3>
                     <h5 class="text-success mb-2"></h5>
                     <p class="text-secondary mb-0">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Reiciendis vero deleniti dignissimos.
+                        <%= item.description %>
                     </p>
                     <div class="d-flex gap-2 mt-3">
-                        <button type="button" class="btn btn-outline-dark btn-sm" data-item-id="<%= item.id %>">
+                        <a href="/items/update?item_id=<%= item.id %>" class="btn btn-outline-dark btn-sm">
                             Update Item
-                        </button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" data-item-id="<%= item.id %>">
+                        </a>
+                        <a href="/items/delete?item_id=<%= item.id %>" class="btn btn-outline-danger btn-sm">
                             Delete Item
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

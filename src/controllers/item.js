@@ -1,11 +1,20 @@
 //importing the model functions for the items
-import {getAllItems,createItem,getOneItem} from '../models/items.js';
+import {getAllItems,createItem,getOneItem,updateItem,deleteItem} from '../models/items.js';
 import {GetUserById} from '../models/users.js';
+import fs from 'fs/promises';
+import path from 'path';
 
 export async function renderItems (req, res, next) {
  try {
     const items = await getAllItems();
-    res.render('index',{items})
+
+    const shortItems = items.map(item => ({
+      ...item,
+      description: item.description.length > 100 ?
+                     item.description.slice(0,100) + "..."
+                     :item.description
+    }))
+    res.render('index',{shortItems})
 
     
  } catch (error) {
@@ -26,7 +35,7 @@ export async function renderItemDetails(req,res,next) {
       })
       
    } catch (error) {
-      
+      next(error);
    }
 }
 export async function createproduct(req,res,next) {
@@ -45,4 +54,54 @@ export async function createproduct(req,res,next) {
       console.error('failed to retrieve data', error.message)
       throw error;
  }
+}
+export async function RenderUpdateItem(req,res,next) {
+   const id = Number(req.query.item_id);
+   try {
+      const itemData = await getOneItem(id);
+      console.log(itemData);
+      res.render('forms/itemUpdate',{item:itemData});
+   } catch (error) {
+      next(error);
+   }
+}
+export async function UpdateItems(req, res, next) {
+   try {
+      const id = Number(req.body.id);
+      if (!Number.isFinite(id)) {
+         return res.status(400).json({ success: false, message: 'Invalid item id' });
+      }
+
+      const existingItem = await getOneItem(id);
+      if (!existingItem) {
+         return res.status(404).json({ success: false, message: 'Item not found' });
+      }
+
+      const item = {
+         ...req.body,
+         id,
+         image_path: req.file?.filename || existingItem.image_path
+      };
+      const updatedItem = await updateItem(item)
+      res.status(200).json({ success: true, item: updatedItem })
+   } catch (error) {
+      next(error);
+   }
+}
+export async function deleteItems(req, res, next) {
+   const id  = Number(req.query.item_id);
+   const result = await deleteItem(id);
+   if (deleted.image_path) {  
+      const safeFileName = path.basename(result.image_path);
+      const imageFullPath = path.join(process.cwd(), 'public', 'img', safeFileName);
+   }
+   try {
+        await fs.unlink(imageFullPath);
+      } catch (err) {
+        if (err.code !== 'ENOENT') {
+          console.error('Image deletion failed:', err.message);
+        }
+      }
+   res.status(200);
+   res.redirect("/users/profile?id=1&is_admin=false");
 }

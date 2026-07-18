@@ -17,12 +17,19 @@ export async function renderProfile(req, res,next) {
         
         const userData = await GetUserById(id);
         const itemsData = await getItemsByUser(id)
+
+        const shortItems = itemsData.map(item => ({
+            ...item,
+            description: item.description.length > 100 ?
+                        item.description.slice(0,100) + "..."
+                        :item.description
+        }));
         res.render('profile',{
             user:userData,
-            items:itemsData
-        })
+            items:shortItems
+        });
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 export async function loginUser(req, res, next) {

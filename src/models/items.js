@@ -35,13 +35,13 @@ export async function createItem(object) {
 }
 
 export async function updateItem(object) {
-    const {id,province_id,name,price,description} = object;
-    const values = [itemId,provinceId,name,price,description];
-    const sql  =  `UPDATE item SET
-        province_id = $2,
-        name = $3,
-        price = $4,
-        description = $5
+    const {id,name,price,description,image_path} = object;
+    const values = [id,name,price,description,image_path];
+    const sql  =  `UPDATE items SET
+        name = $2,
+        price = $3,
+        description = $4,
+        image_path = $5
         WHERE id = $1
         RETURNING *;
     `;
@@ -51,9 +51,9 @@ export async function updateItem(object) {
 }
 
 export async function deleteItem(id) {
-    const sql = `DELETE * FROM items WHERE id = $1 RETURNING id;`;
-    const result = await query(sql,values);
-    return result;
+    const sql = `DELETE FROM items WHERE id = $1 RETURNING id, image_path;`;
+    const result = await query(sql,[id]);
+    return result.rows[0];
 
 
 }
