@@ -1,16 +1,18 @@
 import express from 'express';
-import {renderSignUp,renderProfile, createRegistration, loginUser} from '../controllers/users.js';
+import {renderSignUp,renderProfile,renderUserUpdateForm, createRegistration, loginUser,updateAccount} from '../controllers/users.js';
 import upload from '../Middleware/image.js';
 
 const router  = express.Router();
 router.get('/login', async (req, res) => {
     res.render('forms/login')
-})
-router.post('/login', loginUser)
+});
+router.post('/login', loginUser);
 
-router.get('/profile',renderProfile)
+router.get('/profile',renderProfile);
+router.get('/update',renderUserUpdateForm);
 
-router.get('/signup',renderSignUp)
-router.post('/signup',upload.single("profile_image"), createRegistration)
+router.get('/signup',renderSignUp);
+router.post('/signup',upload.single("profile_image"), createRegistration);
+router.put('/update',upload.single("profile_image"),updateAccount);
 
 export default router;

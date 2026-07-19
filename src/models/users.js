@@ -33,15 +33,13 @@ export async function updateUser(object) {
     const {first_name,last_name,phone,email,profile_image,google_id,password,id} = object;
     const values = [first_name,last_name,phone,email,profile_image,google_id,password,id];
     const sql = `UPDATE users SET 
-
     first_name = $1,
     last_name = $2,
     phone = $3,
     email = $4,
     profile_image = $5,
     google_id = $6,
-    password = $7,
-
+    password = $7
     WHERE id = $8`;
     let result = await query(sql,values);
     return result.rows[0];

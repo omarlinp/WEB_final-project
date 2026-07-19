@@ -38,6 +38,15 @@ export async function renderProfile(req, res,next) {
         next(error);
     }
 }
+export async function renderUserUpdateForm(req, res, next) {
+    try {
+        const userData = await GetUserById(req.session.userId);
+        res.render('forms/userUpdate', {user:userData})
+         
+    } catch (error) {
+        next(error)
+    }
+}
 export async function loginUser(req, res, next) {
     try {
         
@@ -89,9 +98,32 @@ export async function createRegistration(req,res,next) {
 }
 export async function updateAccount(req, res, next) {
     try {
-        
+        const id = Number(req.session.userId);
+        console.log(id);
+        if (!Number.isFinite(id)) {
+         return res.status(400).json({ success: false, message: 'Invalid item id' });
+      }
+      const existingUser = await GetUserById(id);
+      if(!existingUser){
+        return res.status(404).json({ success: false, message: 'User not found' });
+      }
+      let password = existingUser.password;
+      if (req.body.password) {
+          password = await bcrypt.hash(req.body.password, 10);
+      }
+      const user = {
+        ...req.body,
+        password,
+        id,
+        profile_image: req.file?.filename || existingUser.profile_image
+      };
+      const updatedUser = await updateUser(user);
+      res.status(200).json({success:true})
+      //res.redirect(`/users/profile?id=${id}`)
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        res.status(500).json({ success: false, message: 'Error updating account' });
+        next(error);
     }
 }
 export async function deleteAccount(req,res,next) {

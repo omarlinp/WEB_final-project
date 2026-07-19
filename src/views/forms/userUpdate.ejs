@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Account</title>
+    <!-- Bootstrap -->
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container">
+    <div class="row justify-content-center align-items-center min-vh-100">
+        <div class="col-lg-10">
+            <div class="card shadow border-0">
+                <div class="row g-0">
+                    <div class="col-lg-5 bg-dark text-white d-flex flex-column justify-content-center align-items-center p-5">
+                        <i class="bi bi-cpu fs-1 mb-4"></i>
+                        <h1 class="fw-bold">TechMarket</h1>
+                        <p class="text-center mt-3">Update your account information below.</p>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <h2 class="fw-bold">Update Account</h2>
+                            <p class="text-secondary mb-4">Edit your information below.</p>
+                            <form id="updateAccount" class="needs-validation" enctype="multipart/form-data" novalidate>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label" for="first_name">First Name</label>
+                                        <input type="text" class="form-control" id="first_name" placeholder="John" name="first_name" value="<%= user.first_name %>" required minlength="2" maxlength="50" pattern="[A-Za-z][A-Za-z\s'\-]{1,49}" title="First name must be 2-50 characters and contain letters only (spaces, apostrophes, and hyphens allowed)." autocomplete="given-name">
+                                        <div class="invalid-feedback">Please enter a valid first name.</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label" for="last_name">Last Name</label>
+                                        <input type="text" class="form-control" id="last_name" placeholder="Doe" name="last_name" value="<%= user.last_name %>" required minlength="2" maxlength="50" pattern="[A-Za-z][A-Za-z\s'\-]{1,49}" title="Last name must be 2-50 characters and contain letters only (spaces, apostrophes, and hyphens allowed)." autocomplete="family-name">
+                                        <div class="invalid-feedback">Please enter a valid last name.</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 text-center">
+                                    <label for="profile_image" class="form-label d-block">Profile Picture</label>
+                                    <img id="profilePreview" src="<%= user.profile_image ? '/img/' + user.profile_image : 'https://placehold.co/120x120?text=Photo' %>" class="rounded-circle border mb-3" style="width:120px;height:120px;object-fit:cover;" alt="Profile preview">
+                                    <input type="file" class="form-control" id="profile_image" name="profile_image" accept="image/*">
+                                    <div class="form-text">Leave empty to keep your current photo.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="username">Username</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">@</span>
+                                        <input type="text" class="form-control" id="username" placeholder="username" name="username" value="<%= user.username %>" required minlength="3" maxlength="30" pattern="[A-Za-z0-9_]{3,30}" title="Username must be 3-30 characters using only letters, numbers, and underscores." autocomplete="username">
+                                        <div class="invalid-feedback">Choose a username with 3-30 letters, numbers, or underscores.</div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="email">Email Address</label>
+                                    <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" value="<%= user.email %>" required maxlength="100" autocomplete="email">
+                                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="phone">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" placeholder="(555) 123-4567" name="phone" value="<%= user.phone %>" required minlength="7" maxlength="20" pattern="\+?[0-9() \-]{7,20}" title="Enter a valid phone number using digits and optional +, spaces, parentheses, or hyphens." autocomplete="tel">
+                                    <div class="invalid-feedback">Please enter a valid phone number.</div>
+                                </div>
+                                <hr>
+                                <p class="text-secondary small mb-3">Leave the password fields empty to keep your current password.</p>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label" for="password">New Password</label>
+                                        <input type="password" class="form-control" id="password" name="password" minlength="8" maxlength="128" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,128}" title="Password must be at least 8 characters and include uppercase, lowercase, and a number." autocomplete="new-password">
+                                        <div class="invalid-feedback">Use at least 8 characters with uppercase, lowercase, and a number.</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label" for="confirm_password">Confirm New Password</label>
+                                        <input type="password" class="form-control" id="confirm_password" autocomplete="new-password" oninput="this.setCustomValidity(this.value !== document.getElementById('password').value ? 'Passwords do not match.' : '')">
+                                        <div class="invalid-feedback">Passwords must match.</div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-dark w-100 mb-3">Save Changes</button>
+                                <a href="/users/profile" class="btn btn-outline-secondary w-100">Cancel</a>
+                            </form>
+                            <hr>
+                            <p class="text-center mb-0"><a href="/users/profile">Back to Profile</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/userUpdateForm.js"></script>
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
