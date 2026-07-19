@@ -16,7 +16,6 @@ form.addEventListener("submit", async (event) => {
         login: formData.get("login"),
         password: formData.get("password")
     };
-    const remember = formData.get("remember");
     try {
         const response = await fetch('/users/login',{
             method: "POST",
@@ -25,14 +24,23 @@ form.addEventListener("submit", async (event) => {
             },
             body: JSON.stringify(data)
         });
-        const result = await response.json(); 
+
+        let result;
+        const contentType = response.headers.get("content-type") || "";
+        if (contentType.includes("application/json")) {
+            result = await response.json();
+        } else {
+            throw new Error(`Unexpected response type: ${contentType || "unknown"}`);
+        }
+
         if (result.success) {
             window.location.href = result.redirect;
         } else {
-            alert(result.message);
+            alert(result.message || "Login failed. Please try again.");
         }
     } catch (error) {
-        console.log(error);
+        console.error("Login request failed:", error);
+        alert("Unable to sign in right now. Please try again in a moment.");
     }
 })
 

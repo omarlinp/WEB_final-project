@@ -19,6 +19,11 @@ const PORT = process.env.PORT || 3000;
 // setup Express server
 const app = express()
 
+// Render runs behind a reverse proxy. Trust it so secure cookies are set correctly.
+if (process.env.NODE_ENV === 'production') {
+    app.set('trust proxy', 1);
+}
+
 //set the view engine
 app.set('view engine','ejs');
 app.set('views', path.join(__dirname, 'src/views'));
@@ -35,9 +40,11 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave:false,
     saveUninitialized: false,
+    proxy: process.env.NODE_ENV === 'production',
     cookie:{
         maxAge: 1000 * 60 * 60 * 24,
-        secure: process.env.NODE_ENV === 'production'
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax'
     }
 }))
 
