@@ -31,9 +31,6 @@ export async function renderItems (req, res, next) {
  }
 }
 export async function renderItemDetails(req,res,next) {
-   if (!ensureLoggedIn(req, res)) {
-      return;
-   }
    const id = Number(req.query.item_id);
    try {
       const itemData = await getOneItem(id)
