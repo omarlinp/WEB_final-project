@@ -118,8 +118,7 @@ export async function updateAccount(req, res, next) {
         profile_image: req.file?.filename || existingUser.profile_image
       };
       const updatedUser = await updateUser(user);
-      res.status(200).json({success:true})
-      //res.redirect(`/users/profile?id=${id}`)
+      res.redirect(`/users/profile?id=${id}`)
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Error updating account' });
