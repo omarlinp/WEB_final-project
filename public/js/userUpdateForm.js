@@ -17,9 +17,17 @@ form.addEventListener("submit", async (event) =>{
             method: "PUT",
             body:formData
         })
+        if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}`);
+        }
         const result = await response.json();
-        console.log(result);
+        if (result.success && result.redirect) {
+            window.location.href = result.redirect;
+            return;
+        }
+        alert(result.message || "Unable to update account.");
     } catch (error) {
-        console.log(error)
+        console.error(error)
+        alert("Unable to update account right now. Please try again.");
     }
 })

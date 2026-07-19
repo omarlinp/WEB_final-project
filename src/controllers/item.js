@@ -106,7 +106,7 @@ export async function UpdateItems(req, res, next) {
          image_path: req.file?.filename || existingItem.image_path
       };
       const updatedItem = await updateItem(item)
-      res.status(200).json({ success: true, item: updatedItem })
+      res.status(200).json({ success: true, item: updatedItem, redirect: '/users/profile' })
    } catch (error) {
       next(error);
    }
