@@ -1,0 +1,184 @@
+<%- include('../partials/header') %>
+<style>
+	.admin-hero {
+		background: linear-gradient(135deg, #111827 0%, #1f2937 55%, #374151 100%);
+		color: #fff;
+		border-radius: 1.5rem;
+	}
+
+	.user-avatar {
+		width: 56px;
+		height: 56px;
+		object-fit: cover;
+	}
+
+	.user-table th,
+	.user-table td {
+		vertical-align: middle;
+	}
+
+	.item-thumb {
+		width: 64px;
+		height: 64px;
+		object-fit: cover;
+		background: #f8f9fa;
+	}
+</style>
+
+<div class="container py-5">
+	<div class="admin-hero p-4 p-lg-5 mb-4 shadow-sm">
+		<div class="row align-items-center g-4">
+			<div class="col-lg-8">
+				<p class="text-uppercase text-white-50 fw-semibold mb-2">Admin dashboard</p>
+				<h1 class="display-6 fw-bold mb-3">All registered users</h1>
+				<p class="lead mb-0 text-white-75">
+					Review every account on the platform from one place.
+				</p>
+			</div>
+			<div class="col-lg-4 text-lg-end">
+				<div class="bg-white text-dark rounded-4 p-4 d-inline-block shadow-sm">
+					<div class="text-secondary small">Total users</div>
+					<div class="display-5 fw-bold mb-0"><%= users.length %></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card border-0 shadow-sm">
+		<div class="card-header bg-white border-0 p-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
+			<div>
+				<h2 class="h4 fw-bold mb-1">Users</h2>
+				<p class="text-secondary mb-0">A complete list of accounts currently stored in the database.</p>
+			</div>
+			<span class="badge text-bg-dark px-3 py-2"><%= users.length %> accounts</span>
+		</div>
+
+		<div class="table-responsive">
+			<table class="table user-table align-middle mb-0">
+				<thead class="table-light">
+					<tr>
+						<th scope="col">User</th>
+						<th scope="col">Contact</th>
+						<th scope="col">Username</th>
+						<th scope="col">Role</th>
+						<th scope="col">Joined</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% if (users.length) { %>
+						<% users.forEach(user => { %>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center gap-3">
+										<img
+											src="<%= user.profile_image ? '/img/' + user.profile_image : 'https://placehold.co/120x120?text=User' %>"
+											class="rounded-circle user-avatar border"
+											alt="<%= user.first_name %> <%= user.last_name %>">
+										<div>
+											<div class="fw-semibold"><%= user.first_name %> <%= user.last_name %></div>
+											<div class="text-secondary small">ID: <%= user.id %></div>
+										</div>
+									</div>
+								</td>
+								<td>
+									<div class="fw-medium"><%= user.email %></div>
+									<div class="text-secondary small"><%= user.phone || 'No phone provided' %></div>
+								</td>
+								<td>@<%= user.username %></td>
+								<td>
+									<% if (user.is_admin) { %>
+										<span class="badge text-bg-success">Admin</span>
+									<% } else { %>
+										<span class="badge text-bg-secondary">User</span>
+									<% } %>
+								</td>
+								<td>
+									<span class="text-secondary">Account ready</span>
+								</td>
+								<td>
+									<a
+										href="/admin/delete-user?id=<%= user.id %>"
+										class="btn btn-outline-danger btn-sm"
+										onclick="return confirm('Delete this user? This action cannot be undone.')">
+										Delete
+									</a>
+								</td>
+							</tr>
+						<% }) %>
+					<% } else { %>
+						<tr>
+							<td colspan="6" class="text-center py-5 text-secondary">
+								No users found.
+							</td>
+						</tr>
+					<% } %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="card border-0 shadow-sm mt-5">
+		<div class="card-header bg-white border-0 p-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
+			<div>
+				<h2 class="h4 fw-bold mb-1">Items for sale</h2>
+				<p class="text-secondary mb-0">All products currently available in the marketplace.</p>
+			</div>
+			<div class="text-end">
+				<div class="text-secondary small">Items listed</div>
+				<div class="badge text-bg-dark px-3 py-2 fs-6"><%= items.length %></div>
+			</div>
+		</div>
+
+		<div class="table-responsive">
+			<table class="table user-table align-middle mb-0">
+				<thead class="table-light">
+					<tr>
+						<th scope="col">Item</th>
+						<th scope="col">Price</th>
+						<th scope="col">Seller ID</th>
+						<th scope="col">Posted</th>
+						<th scope="col">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% if (items.length) { %>
+						<% items.forEach(item => { %>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center gap-3">
+										<img
+											src="<%= item.image_path ? '/img/' + item.image_path : 'https://placehold.co/120x120?text=Item' %>"
+											class="rounded item-thumb border"
+											alt="<%= item.name %>">
+										<div>
+											<div class="fw-semibold"><%= item.name %></div>
+											<div class="text-secondary small">ID: <%= item.id %></div>
+										</div>
+									</div>
+								</td>
+								<td class="fw-semibold text-success"><%= item.price %></td>
+								<td><%= item.user_id %></td>
+								<td class="text-secondary"><%= item.created_date || 'N/A' %></td>
+								<td>
+									<span class="text-secondary"><%= item.description ? item.description.slice(0, 90) + (item.description.length > 90 ? '...' : '') : 'No description provided' %></span>
+								</td>
+							</tr>
+						<% }) %>
+					<% } else { %>
+						<tr>
+							<td colspan="5" class="text-center py-5 text-secondary">
+								No items found.
+							</td>
+						</tr>
+					<% } %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<%- include('../partials/footer') %>
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
