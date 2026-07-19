@@ -2,6 +2,14 @@ import {getAllUsers,GetUser,GetUserById,createUser,updateUser,deleteUser} from '
 import {getItemsByUser} from '../models/items.js';
 import bcrypt from "bcrypt";
 
+function ensureLoggedIn(req, res) {
+    if (!req.session?.isLoggedIn || !req.session?.userId) {
+        res.redirect('/users/login');
+        return false;
+    }
+    return true;
+}
+
 export async function renderSignUp(req, res, next) {
     try {
         res.render('forms/registration', { title: 'Sign Up' });
@@ -11,15 +19,12 @@ export async function renderSignUp(req, res, next) {
     }
 }
 export async function renderProfile(req, res,next) {
-    if (!req.session.isLoggedIn) {
-        return res.redirect('/users/login');
+    if (!ensureLoggedIn(req, res)) {
+        return;
     }
     try {
         const id = req.session.userId
-        if (!id) {
-            return res.redirect('/users/login');
-        }
-        
+
         const userData = await GetUserById(id);
         const itemsData = await getItemsByUser(id)
 
@@ -39,6 +44,9 @@ export async function renderProfile(req, res,next) {
     }
 }
 export async function renderUserUpdateForm(req, res, next) {
+    if (!ensureLoggedIn(req, res)) {
+        return;
+    }
     try {
         const userData = await GetUserById(req.session.userId);
         res.render('forms/userUpdate', {user:userData})
@@ -97,9 +105,11 @@ export async function createRegistration(req,res,next) {
     }
 }
 export async function updateAccount(req, res, next) {
+    if (!ensureLoggedIn(req, res)) {
+        return;
+    }
     try {
         const id = Number(req.session.userId);
-        console.log(id);
         if (!Number.isFinite(id)) {
          return res.status(400).json({ success: false, message: 'Invalid item id' });
       }
@@ -118,7 +128,7 @@ export async function updateAccount(req, res, next) {
         profile_image: req.file?.filename || existingUser.profile_image
       };
       const updatedUser = await updateUser(user);
-      res.redirect(`/users/profile?id=${id}`)
+      res.redirect('/users/profile');
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Error updating account' });

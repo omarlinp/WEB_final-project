@@ -4,8 +4,15 @@ import {GetUserById} from '../models/users.js';
 import fs from 'fs/promises';
 import path from 'path';
 
+function ensureLoggedIn(req, res) {
+   if (!req.session?.isLoggedIn || !req.session?.userId) {
+      res.redirect('/users/login');
+      return false;
+   }
+   return true;
+}
+
 export async function renderItems (req, res, next) {
-   
    try {
     const items = await getAllItems();
 
@@ -24,6 +31,9 @@ export async function renderItems (req, res, next) {
  }
 }
 export async function renderItemDetails(req,res,next) {
+   if (!ensureLoggedIn(req, res)) {
+      return;
+   }
    const id = Number(req.query.item_id);
    try {
       const itemData = await getOneItem(id)
@@ -40,9 +50,15 @@ export async function renderItemDetails(req,res,next) {
    }
 }
 export async function renderCreateItemForm(req, res, next) {
+   if (!ensureLoggedIn(req, res)) {
+      return;
+   }
    res.render('forms/item')
 }
 export async function createproduct(req,res,next) {
+   if (!ensureLoggedIn(req, res)) {
+      return;
+   }
    try {
       const item = {
          ...req.body,
@@ -52,7 +68,7 @@ export async function createproduct(req,res,next) {
 
       const items = await createItem(item);
       console.log(items);
-      res.status(200).json({ success: true, items });
+      res.redirect('/users/profile');
 
    } catch (error) {
       console.error('failed to retrieve data', error.message)
@@ -60,6 +76,9 @@ export async function createproduct(req,res,next) {
  }
 }
 export async function RenderUpdateItem(req,res,next) {
+   if (!ensureLoggedIn(req, res)) {
+      return;
+   }
    const id = Number(req.query.item_id);
    try {
       const itemData = await getOneItem(id);
@@ -70,6 +89,9 @@ export async function RenderUpdateItem(req,res,next) {
    }
 }
 export async function UpdateItems(req, res, next) {
+   if (!ensureLoggedIn(req, res)) {
+      return;
+   }
    try {
       const id = Number(req.body.id);
       if (!Number.isFinite(id)) {
@@ -93,6 +115,9 @@ export async function UpdateItems(req, res, next) {
    }
 }
 export async function deleteItems(req, res, next) {
+   if (!ensureLoggedIn(req, res)) {
+      return;
+   }
    try {
       const id = Number(req.query.item_id);
 

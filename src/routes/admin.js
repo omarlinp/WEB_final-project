@@ -4,6 +4,20 @@ import { deleteUser } from '../models/users.js';
 import { getAllItems } from '../models/items.js';
 const router  = express.Router();
 
+function ensureAdmin(req, res, next) {
+    if (!req.session?.isLoggedIn) {
+        return res.redirect('/users/login');
+    }
+
+    if (!req.session?.isAdmin) {
+        return res.status(403).send('Access denied');
+    }
+
+    return next();
+}
+
+router.use(ensureAdmin);
+
 router.get('/', async (req, res, next) => {
     try {
         const users = await getAllUsers();
