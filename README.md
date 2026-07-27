@@ -17,7 +17,7 @@ The two users are:
 - byuadmin
 
 Known limitations:
--	You the create listing does not redirect
+-	You the create listing does not redirect, you will have to go back. 
 -	The sign in with Google does not work. 
 -	There is only 2 types of users. 
 
