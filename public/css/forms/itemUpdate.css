@@ -1,0 +1,5 @@
+.current-item-image {
+    max-height: 220px;
+    object-fit: contain;
+    background-color: #f8f9fa;
+}

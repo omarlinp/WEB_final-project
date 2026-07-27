@@ -1,29 +1,4 @@
-<%- include('../partials/header') %>
-<style>
-	.admin-hero {
-		background: linear-gradient(135deg, #111827 0%, #1f2937 55%, #374151 100%);
-		color: #fff;
-		border-radius: 1.5rem;
-	}
-
-	.user-avatar {
-		width: 56px;
-		height: 56px;
-		object-fit: cover;
-	}
-
-	.user-table th,
-	.user-table td {
-		vertical-align: middle;
-	}
-
-	.item-thumb {
-		width: 64px;
-		height: 64px;
-		object-fit: cover;
-		background: #f8f9fa;
-	}
-</style>
+<%- include('../partials/header', { pageCss: '/css/admin.css' }) %>
 
 <div class="container py-5">
 	<div class="admin-hero p-4 p-lg-5 mb-4 shadow-sm">
