@@ -11,10 +11,10 @@ User Roles
 There are only 2 users in the project:
 -	Sellers: these users are allowed to manage and create listing for their products to sell. They would be able to update existing listings. 
 -	Admins: this type of user has user control and would be able to delete listings and the users that created them. 
-The two users are 
+The two users are:
+- byusellers
+- byuadmin
 
-byusellers
-byuadmin
 Known limitations:
 -	You the create listing does not redirect
 -	The sign in with Google does not work. 
